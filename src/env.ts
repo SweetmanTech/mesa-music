@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const isNode = new Function("try {return this===global;}catch(e){return false;}")()
+const isNode = new Function('try {return this===global;}catch(e){return false;}')()
 
 // Define the schema for your OAuth providers
 const SupabaseOAuthProvider = z.enum([
@@ -24,7 +24,7 @@ const SupabaseOAuthProvider = z.enum([
   'twitter',
   'workos',
   'zoom',
-  'fly'
+  'fly',
 ])
 
 const ProviderArray = z.array(SupabaseOAuthProvider)
@@ -82,9 +82,9 @@ if (!parsed.success) {
   const count = parsed.error.errors.length > 1 ? 's' : ''
   const message = [
     `Missing or invalid environment variable${count}:`,
-    ...(parsed.error.errors.map(error => `  ${error.path}: ${error.message}`))
-  ].join('\n') 
-  
+    ...parsed.error.errors.map((error) => `  ${error.path}: ${error.message}`),
+  ].join('\n')
+
   // Always log errors
   console.error(`\n${message}\n`)
 
@@ -94,7 +94,7 @@ if (!parsed.success) {
   }
 }
 
-export type EnvType = z.infer<typeof envSchema>;
+export type EnvType = z.infer<typeof envSchema>
 
 export const env: Readonly<EnvType> = Object.freeze(parsed.success ? parsed.data : {})
 

@@ -4,7 +4,7 @@ import { ethGetLogs } from "@/lib/alchemy/eth_getLogs";
 import { Address } from "viem";
 import { findUniqueMatches } from "@/lib/eas/findUniqueMatches";
 
-export const runtime = "edge";
+export const runtime = 'edge'
 
 export async function GET(req: NextRequest) {
   try {
@@ -15,9 +15,9 @@ export async function GET(req: NextRequest) {
     let serializedAttestations = attestations.map((attestation: any) => ({
       ...attestation,
       result: attestation.result.map((value: any) =>
-        typeof value === "bigint" ? value.toString() : value
+        typeof value === 'bigint' ? value.toString() : value,
       ),
-    }));
+    }))
 
     serializedAttestations = findUniqueMatches(
       serializedAttestations.reverse()
@@ -28,6 +28,6 @@ export async function GET(req: NextRequest) {
       { status: 200 }
     );
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }

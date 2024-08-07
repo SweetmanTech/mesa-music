@@ -32,7 +32,7 @@ export function createServerClient(cookieStore: ReturnType<typeof cookies>) {
           }
         },
       },
-    }
+    },
   )
 }
 

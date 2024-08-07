@@ -4,8 +4,8 @@ import { getProjects } from "@/lib/eas/getProjects";
 import { getDecodedProjectsData } from "@/lib/eas/getDecodedProjectsData";
 
 const useProjects = () => {
-  const { address } = useAccount();
-  const [attestations, setAttestations] = useState<any[]>([]);
+  const { address } = useAccount()
+  const [attestations, setAttestations] = useState<any[]>([])
 
   useEffect(() => {
     const init = async () => {
@@ -15,14 +15,14 @@ const useProjects = () => {
         const decodedAttestations = getDecodedProjectsData(data);
         setAttestations(decodedAttestations.reverse() as any);
       } catch (error) {
-        console.error("Failed to fetch attestations:", error);
+        console.error('Failed to fetch attestations:', error)
       }
-    };
-    if (!address) return;
-    init();
-  }, [address]);
+    }
+    if (!address) return
+    init()
+  }, [address])
 
-  return { projects: attestations };
-};
+  return { projects: attestations }
+}
 
-export default useProjects;
+export default useProjects

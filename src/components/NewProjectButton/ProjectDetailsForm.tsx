@@ -10,13 +10,16 @@ import { toast } from "../ui/use-toast";
 import { usePaymasterProvider } from "../../context/Paymasters";
 import usePaymasterAttest from "@/hooks/usePaymasterAttest";
 import { useProjectProvider } from "@/context/ProjectProvider";
+import { CHAIN_ID } from "@/lib/consts";
+import { useSwitchChain } from "wagmi";
 
 export default function ProjectDetailsForm() {
   const { id } = usePaymasterProvider();
   const { attest } = usePaymasterAttest();
   const [loading, setLoading] = useState<boolean>(false);
   const { name, setName, setDescription } = useProjectProvider();
-
+  const { switchChainAsync } = useSwitchChain()
+  
   useEffect(() => {
     if (id !== undefined) {
       toast({
@@ -38,6 +41,7 @@ export default function ProjectDetailsForm() {
       return;
     }
 
+    await switchChainAsync({ chainId: CHAIN_ID })
     setLoading(true);
 
     try {
@@ -95,5 +99,5 @@ export default function ProjectDetailsForm() {
         )}
       </div>
     </div>
-  );
+  )
 }

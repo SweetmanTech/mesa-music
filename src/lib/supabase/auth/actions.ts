@@ -10,31 +10,40 @@ import { Locale } from '@/../i18n.config'
 import env from '@/env'
 
 const schemas = {
-  signInWithOtp: zfd.formData(z.object({
-    email: z.string(),
-    lang: z.string(),
-  }).transform(({lang, ...data}) => ({
-    ...data,
-    options: {
-      shouldCreateUser: env.NEXT_PUBLIC_SIGNUPS_OPEN,
-      // Smuggle the lang via unused option
-      emailRedirectTo: `${origin()}/${lang}`,
-    },
-  }))),
-  
-  signInWithOAuth: zfd.formData(z.object({
-    provider: z.string().transform((provider) => provider as Provider),
-    lang: z.string(),
-  }).transform(({lang, ...data}) => ({
-    ...data,
-    options: {
-      redirectTo: `${origin()}/${lang}/auth/callback`,
-    },
-  }))),
+  signInWithOtp: zfd.formData(
+    z
+      .object({
+        email: z.string(),
+        lang: z.string(),
+      })
+      .transform(({ lang, ...data }) => ({
+        ...data,
+        options: {
+          shouldCreateUser: env.NEXT_PUBLIC_SIGNUPS_OPEN,
+          // Smuggle the lang via unused option
+          emailRedirectTo: `${origin()}/${lang}`,
+        },
+      })),
+  ),
+
+  signInWithOAuth: zfd.formData(
+    z
+      .object({
+        provider: z.string().transform((provider) => provider as Provider),
+        lang: z.string(),
+      })
+      .transform(({ lang, ...data }) => ({
+        ...data,
+        options: {
+          redirectTo: `${origin()}/${lang}/auth/callback`,
+        },
+      })),
+  ),
 }
 
 type AuthError = {
-  data: null, error: {
+  data: null
+  error: {
     message: string
   }
 }
@@ -42,7 +51,7 @@ type AuthError = {
 type AuthMethod = keyof typeof schemas
 
 type AuthResponse = {
-  [M in AuthMethod]: ReturnType<SupabaseClient['auth'][M]> 
+  [M in AuthMethod]: ReturnType<SupabaseClient['auth'][M]>
 }
 
 type AuthCredentials = {
@@ -56,7 +65,7 @@ type AuthMethodFns = {
 function origin() {
   // Get the server origin from the request
   const requestHeaders = headers()
-  
+
   // Use origin header if present
   const origin = requestHeaders.get('origin')
   if (origin) {
@@ -78,12 +87,12 @@ function origin() {
 
 function errorResponse(error: unknown): AuthError {
   const message = `${error}` || 'Unknown Error'
-  return {data: null, error: {message}}
+  return { data: null, error: { message } }
 }
 
 async function signInWithSupabase<M extends AuthMethod>(
-  authMethod: M, 
-  credentials: AuthCredentials[M]
+  authMethod: M,
+  credentials: AuthCredentials[M],
 ) {
   try {
     // TODO pass Database type to client constructor
@@ -103,13 +112,13 @@ async function signInWithSupabase<M extends AuthMethod>(
   }
 }
 
-  function createSignInFunction<M extends AuthMethod>(
-    authMethod: M, 
-    callback?: (result: Awaited<AuthResponse[M]> | AuthError) => void
+function createSignInFunction<M extends AuthMethod>(
+  authMethod: M,
+  callback?: (result: Awaited<AuthResponse[M]> | AuthError) => void,
 ) {
-  return async function(
+  return async function (
     state: Awaited<AuthResponse[M]> | AuthError,
-    formData: FormData
+    formData: FormData,
   ): Promise<Awaited<AuthResponse[M]> | AuthError> {
     const schema = schemas[authMethod]
     const parsed = schema.safeParse(formData)

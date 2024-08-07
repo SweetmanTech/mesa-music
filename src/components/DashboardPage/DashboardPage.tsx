@@ -16,7 +16,7 @@ const DashboardPage = () => {
       </div>
       <ProjectDataTable data={projects} />
     </main>
-  );
-};
+  )
+}
 
-export default DashboardPage;
+export default DashboardPage

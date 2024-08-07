@@ -57,7 +57,7 @@ export function createMiddlewareClient(request: NextRequest) {
           })
         },
       },
-    }
+    },
   )
 
   return { supabase, response }

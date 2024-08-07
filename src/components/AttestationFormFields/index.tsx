@@ -1,19 +1,19 @@
-import { SignedOffchainAttestation } from "@ethereum-attestation-service/eas-sdk"
-import { serialize } from "superjson"
+import { SignedOffchainAttestation } from '@ethereum-attestation-service/eas-sdk'
+import { serialize } from 'superjson'
 
 export function AttestationFormFields({
   attester,
   attestation,
 }: {
-  attester: string | null,
+  attester: string | null
   attestation: SignedOffchainAttestation | null
 }) {
   if (!attester || !attestation) {
-    return 
+    return
   }
 
   const { json, meta } = serialize(attestation)
-  
+
   return (
     <>
       <input type="hidden" name="attester" value={attester} />

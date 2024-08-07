@@ -11,10 +11,10 @@ export default async function Providers({
   children,
   lang,
 }: {
-  children: React.ReactNode;
-  lang: Locale;
+  children: React.ReactNode
+  lang: Locale
 }) {
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(lang)
   return (
     <LocaleProvider locale={lang}>
       <DictionaryProvider dictionary={dictionary}>
@@ -32,5 +32,5 @@ export default async function Providers({
         </ThemeProvider>
       </DictionaryProvider>
     </LocaleProvider>
-  );
+  )
 }

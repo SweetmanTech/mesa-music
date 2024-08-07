@@ -21,7 +21,7 @@ export const ProjectDataTable = ({ data }: { data: any[] }) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-  });
+  })
 
   return (
     <div className="grid grid-cols-1 gap-4 -mt-7">
@@ -31,16 +31,10 @@ export const ProjectDataTable = ({ data }: { data: any[] }) => {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header, index) => (
-                  <TableHead
-                    key={header.id}
-                    className={index === 0 ? "w-[160px]" : ""}
-                  >
+                  <TableHead key={header.id} className={index === 0 ? 'w-[160px]' : ''}>
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
               </TableRow>
@@ -52,20 +46,14 @@ export const ProjectDataTable = ({ data }: { data: any[] }) => {
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -92,5 +80,5 @@ export const ProjectDataTable = ({ data }: { data: any[] }) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}

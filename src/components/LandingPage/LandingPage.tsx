@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useAccount } from "wagmi";
 import ConnectButton from "../ConnectButton";
@@ -16,7 +16,7 @@ const LandingPage = ({ dict }: any) => {
         </section>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage

@@ -10,4 +10,4 @@ const NewProjectButton = () => (
   </ProjectProvider>
 );
 
-export default NewProjectButton;
+export default NewProjectButton

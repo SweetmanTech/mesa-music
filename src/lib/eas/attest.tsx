@@ -16,9 +16,9 @@ const attest = async (writeContracts: any, capabilities: any, args: any[]) => {
     });
     return tx;
   } catch (err) {
-    console.error("Error during attestation:", err);
-    return false;
+    console.error('Error during attestation:', err)
+    return false
   }
-};
+}
 
-export default attest;
+export default attest
