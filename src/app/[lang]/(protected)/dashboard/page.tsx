@@ -1,5 +1,5 @@
-import DashboardPage from "@/components/DashboardPage";
+import DashboardPage from '@/components/DashboardPage'
 
-const Dashboard = () => <DashboardPage />;
+const Dashboard = () => <DashboardPage />
 
-export default Dashboard;
+export default Dashboard

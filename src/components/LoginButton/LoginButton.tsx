@@ -1,11 +1,11 @@
-import { useAccount } from "wagmi";
-import DisconnectButton from "./DisconnectButton";
-import { ConnectAccount } from "@coinbase/onchainkit/wallet";
+import { useAccount } from 'wagmi'
+import DisconnectButton from './DisconnectButton'
+import { ConnectAccount } from '@coinbase/onchainkit/wallet'
 
 const LoginButton = () => {
-  const { address } = useAccount();
+  const { address } = useAccount()
 
-  return <div>{address ? <DisconnectButton /> : <ConnectAccount />}</div>;
-};
+  return <div>{address ? <DisconnectButton /> : <ConnectAccount />}</div>
+}
 
-export default LoginButton;
+export default LoginButton

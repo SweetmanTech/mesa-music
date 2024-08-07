@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { i18n, Locale } from '@/../i18n.config'
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from '@/components/ui/toaster'
 import Header from '@/components/Header'
 import Providers from '@/context/Providers'
 import env from '@/env'
@@ -14,7 +14,7 @@ import { ToastQuery } from '@/components/ToastQuery'
 
 const inter = Inter({
   subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
 })
 
 export const metadata: Metadata = {

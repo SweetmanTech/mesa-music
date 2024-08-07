@@ -15,9 +15,7 @@ const getLocale = (request: NextRequest): Locale | undefined => {
   const locales: readonly string[] = i18n.locales
 
   // Use negotiator and intl-localematcher to get best locale
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
-    locales as string[]
-  )
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(locales as string[])
 
   const locale = matchLocale(languages, locales, i18n.defaultLocale) as Locale
 
@@ -30,7 +28,7 @@ export const withLocale: MiddlewareFactory = (next) => {
 
     // Check if there is any supported locale in the pathname
     const currentLocale = i18n.locales.find(
-      (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+      (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
     )
 
     // Redirect if there is no locale

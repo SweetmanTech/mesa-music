@@ -1,29 +1,27 @@
-"use client";
+'use client'
 
-import env from "@/env";
-import { useAccount } from "wagmi";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import LoginButton from "../LoginButton";
+import env from '@/env'
+import { useAccount } from 'wagmi'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import LoginButton from '../LoginButton'
 
 const LandingPage = ({ dict }: any) => {
-  const { isConnected } = useAccount();
-  const { push } = useRouter();
+  const { isConnected } = useAccount()
+  const { push } = useRouter()
 
   useEffect(() => {
     if (isConnected) {
-      push("/dashboard");
+      push('/dashboard')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isConnected]);
+  }, [isConnected])
 
   return (
     <main className="grid gap-6 sm:gap-12 md:gap-24">
       <div className="grid grid-rows-[1fr_auto_2fr]">
         <section className="row-start-2 grid gap-4 place-items-center container w-fit p-8">
-          <h1 className="text-4xl font-medium tracking-tight">
-            {dict.welcome}
-          </h1>
+          <h1 className="text-4xl font-medium tracking-tight">{dict.welcome}</h1>
           <LoginButton />
           {!env.NEXT_PUBLIC_SIGNUPS_OPEN && (
             <p className="text-sm text-muted-foreground text-center max-w-[18em]">
@@ -47,7 +45,7 @@ const LandingPage = ({ dict }: any) => {
         </section>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage

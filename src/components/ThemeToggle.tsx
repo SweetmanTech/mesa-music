@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import * as React from 'react'
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { useTheme } from 'next-themes'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useDictionary } from "@/context/DictionaryContext";
-import LoginButton from "./LoginButton";
+} from '@/components/ui/dropdown-menu'
+import { useDictionary } from '@/context/DictionaryContext'
+import LoginButton from './LoginButton'
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme } = useTheme()
   const {
     layout: { themeToggle: dict },
-  } = useDictionary();
+  } = useDictionary()
 
   return (
     <DropdownMenu>
@@ -30,16 +30,10 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <LoginButton />
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          {dict.light}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          {dict.dark}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          {dict.system}
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('light')}>{dict.light}</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>{dict.dark}</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>{dict.system}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

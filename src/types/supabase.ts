@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
 export interface Database {
   auth: {
@@ -38,7 +32,7 @@ export interface Database {
           auth_code: string
           authentication_method: string
           code_challenge: string
-          code_challenge_method: Database["auth"]["Enums"]["code_challenge_method"]
+          code_challenge_method: Database['auth']['Enums']['code_challenge_method']
           created_at: string | null
           id: string
           provider_access_token: string | null
@@ -51,7 +45,7 @@ export interface Database {
           auth_code: string
           authentication_method: string
           code_challenge: string
-          code_challenge_method: Database["auth"]["Enums"]["code_challenge_method"]
+          code_challenge_method: Database['auth']['Enums']['code_challenge_method']
           created_at?: string | null
           id: string
           provider_access_token?: string | null
@@ -64,7 +58,7 @@ export interface Database {
           auth_code?: string
           authentication_method?: string
           code_challenge?: string
-          code_challenge_method?: Database["auth"]["Enums"]["code_challenge_method"]
+          code_challenge_method?: Database['auth']['Enums']['code_challenge_method']
           created_at?: string | null
           id?: string
           provider_access_token?: string | null
@@ -108,12 +102,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "identities_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: 'identities_user_id_fkey'
+            columns: ['user_id']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       instances: {
@@ -164,12 +158,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "mfa_amr_claims_session_id_fkey"
-            columns: ["session_id"]
+            foreignKeyName: 'mfa_amr_claims_session_id_fkey'
+            columns: ['session_id']
             isOneToOne: false
-            referencedRelation: "sessions"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'sessions'
+            referencedColumns: ['id']
+          },
         ]
       }
       mfa_challenges: {
@@ -196,53 +190,53 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "mfa_challenges_auth_factor_id_fkey"
-            columns: ["factor_id"]
+            foreignKeyName: 'mfa_challenges_auth_factor_id_fkey'
+            columns: ['factor_id']
             isOneToOne: false
-            referencedRelation: "mfa_factors"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'mfa_factors'
+            referencedColumns: ['id']
+          },
         ]
       }
       mfa_factors: {
         Row: {
           created_at: string
-          factor_type: Database["auth"]["Enums"]["factor_type"]
+          factor_type: Database['auth']['Enums']['factor_type']
           friendly_name: string | null
           id: string
           secret: string | null
-          status: Database["auth"]["Enums"]["factor_status"]
+          status: Database['auth']['Enums']['factor_status']
           updated_at: string
           user_id: string
         }
         Insert: {
           created_at: string
-          factor_type: Database["auth"]["Enums"]["factor_type"]
+          factor_type: Database['auth']['Enums']['factor_type']
           friendly_name?: string | null
           id: string
           secret?: string | null
-          status: Database["auth"]["Enums"]["factor_status"]
+          status: Database['auth']['Enums']['factor_status']
           updated_at: string
           user_id: string
         }
         Update: {
           created_at?: string
-          factor_type?: Database["auth"]["Enums"]["factor_type"]
+          factor_type?: Database['auth']['Enums']['factor_type']
           friendly_name?: string | null
           id?: string
           secret?: string | null
-          status?: Database["auth"]["Enums"]["factor_status"]
+          status?: Database['auth']['Enums']['factor_status']
           updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "mfa_factors_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: 'mfa_factors_user_id_fkey'
+            columns: ['user_id']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       refresh_tokens: {
@@ -281,12 +275,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "refresh_tokens_session_id_fkey"
-            columns: ["session_id"]
+            foreignKeyName: 'refresh_tokens_session_id_fkey'
+            columns: ['session_id']
             isOneToOne: false
-            referencedRelation: "sessions"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'sessions'
+            referencedColumns: ['id']
+          },
         ]
       }
       saml_providers: {
@@ -322,12 +316,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "saml_providers_sso_provider_id_fkey"
-            columns: ["sso_provider_id"]
+            foreignKeyName: 'saml_providers_sso_provider_id_fkey'
+            columns: ['sso_provider_id']
             isOneToOne: false
-            referencedRelation: "sso_providers"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'sso_providers'
+            referencedColumns: ['id']
+          },
         ]
       }
       saml_relay_states: {
@@ -366,19 +360,19 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "saml_relay_states_flow_state_id_fkey"
-            columns: ["flow_state_id"]
+            foreignKeyName: 'saml_relay_states_flow_state_id_fkey'
+            columns: ['flow_state_id']
             isOneToOne: false
-            referencedRelation: "flow_state"
-            referencedColumns: ["id"]
+            referencedRelation: 'flow_state'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "saml_relay_states_sso_provider_id_fkey"
-            columns: ["sso_provider_id"]
+            foreignKeyName: 'saml_relay_states_sso_provider_id_fkey'
+            columns: ['sso_provider_id']
             isOneToOne: false
-            referencedRelation: "sso_providers"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'sso_providers'
+            referencedColumns: ['id']
+          },
         ]
       }
       schema_migrations: {
@@ -395,7 +389,7 @@ export interface Database {
       }
       sessions: {
         Row: {
-          aal: Database["auth"]["Enums"]["aal_level"] | null
+          aal: Database['auth']['Enums']['aal_level'] | null
           created_at: string | null
           factor_id: string | null
           id: string
@@ -407,7 +401,7 @@ export interface Database {
           user_id: string
         }
         Insert: {
-          aal?: Database["auth"]["Enums"]["aal_level"] | null
+          aal?: Database['auth']['Enums']['aal_level'] | null
           created_at?: string | null
           factor_id?: string | null
           id: string
@@ -419,7 +413,7 @@ export interface Database {
           user_id: string
         }
         Update: {
-          aal?: Database["auth"]["Enums"]["aal_level"] | null
+          aal?: Database['auth']['Enums']['aal_level'] | null
           created_at?: string | null
           factor_id?: string | null
           id?: string
@@ -432,12 +426,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "sessions_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: 'sessions_user_id_fkey'
+            columns: ['user_id']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       sso_domains: {
@@ -464,12 +458,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "sso_domains_sso_provider_id_fkey"
-            columns: ["sso_provider_id"]
+            foreignKeyName: 'sso_domains_sso_provider_id_fkey'
+            columns: ['sso_provider_id']
             isOneToOne: false
-            referencedRelation: "sso_providers"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'sso_providers'
+            referencedColumns: ['id']
+          },
         ]
       }
       sso_providers: {
@@ -627,10 +621,10 @@ export interface Database {
       }
     }
     Enums: {
-      aal_level: "aal1" | "aal2" | "aal3"
-      code_challenge_method: "s256" | "plain"
-      factor_status: "unverified" | "verified"
-      factor_type: "totp" | "webauthn"
+      aal_level: 'aal1' | 'aal2' | 'aal3'
+      code_challenge_method: 's256' | 'plain'
+      factor_status: 'unverified' | 'verified'
+      factor_type: 'totp' | 'webauthn'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -648,7 +642,7 @@ export interface Database {
           id: string
           payload: Json | null
           project_id: string
-          type: Database["mesa"]["Enums"]["project_event_type"]
+          type: Database['mesa']['Enums']['project_event_type']
           updated_at: string
           user_id: string
         }
@@ -661,7 +655,7 @@ export interface Database {
           id?: string
           payload?: Json | null
           project_id: string
-          type: Database["mesa"]["Enums"]["project_event_type"]
+          type: Database['mesa']['Enums']['project_event_type']
           updated_at?: string
           user_id: string
         }
@@ -674,32 +668,32 @@ export interface Database {
           id?: string
           payload?: Json | null
           project_id?: string
-          type?: Database["mesa"]["Enums"]["project_event_type"]
+          type?: Database['mesa']['Enums']['project_event_type']
           updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "project_events_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: 'project_events_created_by_fkey'
+            columns: ['created_by']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedRelation: 'users'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_events_project_id_fkey"
-            columns: ["project_id"]
+            foreignKeyName: 'project_events_project_id_fkey'
+            columns: ['project_id']
             isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
+            referencedRelation: 'projects'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_events_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: 'project_events_user_id_fkey'
+            columns: ['user_id']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       project_invitations: {
@@ -708,59 +702,59 @@ export interface Database {
           created_by: string | null
           id: string
           project_id: string | null
-          status: Database["mesa"]["Enums"]["invitation_status"] | null
+          status: Database['mesa']['Enums']['invitation_status'] | null
           updated_at: string | null
           user_bps: number | null
           user_id: string | null
           user_name: string
-          user_role: Database["mesa"]["Enums"]["project_user_role"] | null
+          user_role: Database['mesa']['Enums']['project_user_role'] | null
         }
         Insert: {
           created_at?: string | null
           created_by?: string | null
           id?: string
           project_id?: string | null
-          status?: Database["mesa"]["Enums"]["invitation_status"] | null
+          status?: Database['mesa']['Enums']['invitation_status'] | null
           updated_at?: string | null
           user_bps?: number | null
           user_id?: string | null
           user_name: string
-          user_role?: Database["mesa"]["Enums"]["project_user_role"] | null
+          user_role?: Database['mesa']['Enums']['project_user_role'] | null
         }
         Update: {
           created_at?: string | null
           created_by?: string | null
           id?: string
           project_id?: string | null
-          status?: Database["mesa"]["Enums"]["invitation_status"] | null
+          status?: Database['mesa']['Enums']['invitation_status'] | null
           updated_at?: string | null
           user_bps?: number | null
           user_id?: string | null
           user_name?: string
-          user_role?: Database["mesa"]["Enums"]["project_user_role"] | null
+          user_role?: Database['mesa']['Enums']['project_user_role'] | null
         }
         Relationships: [
           {
-            foreignKeyName: "project_invitations_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: 'project_invitations_created_by_fkey'
+            columns: ['created_by']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedRelation: 'users'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_invitations_project_id_fkey"
-            columns: ["project_id"]
+            foreignKeyName: 'project_invitations_project_id_fkey'
+            columns: ['project_id']
             isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
+            referencedRelation: 'projects'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_invitations_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: 'project_invitations_user_id_fkey'
+            columns: ['user_id']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       project_users: {
@@ -773,7 +767,7 @@ export interface Database {
           user_bps: number | null
           user_id: string
           user_name: string
-          user_role: Database["mesa"]["Enums"]["project_user_role"] | null
+          user_role: Database['mesa']['Enums']['project_user_role'] | null
         }
         Insert: {
           created_at?: string | null
@@ -784,7 +778,7 @@ export interface Database {
           user_bps?: number | null
           user_id: string
           user_name: string
-          user_role?: Database["mesa"]["Enums"]["project_user_role"] | null
+          user_role?: Database['mesa']['Enums']['project_user_role'] | null
         }
         Update: {
           created_at?: string | null
@@ -795,37 +789,37 @@ export interface Database {
           user_bps?: number | null
           user_id?: string
           user_name?: string
-          user_role?: Database["mesa"]["Enums"]["project_user_role"] | null
+          user_role?: Database['mesa']['Enums']['project_user_role'] | null
         }
         Relationships: [
           {
-            foreignKeyName: "project_users_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: 'project_users_created_by_fkey'
+            columns: ['created_by']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedRelation: 'users'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_users_invitation_id_fkey"
-            columns: ["invitation_id"]
+            foreignKeyName: 'project_users_invitation_id_fkey'
+            columns: ['invitation_id']
             isOneToOne: false
-            referencedRelation: "project_invitations"
-            referencedColumns: ["id"]
+            referencedRelation: 'project_invitations'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_users_project_id_fkey"
-            columns: ["project_id"]
+            foreignKeyName: 'project_users_project_id_fkey'
+            columns: ['project_id']
             isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
+            referencedRelation: 'projects'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "project_users_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: 'project_users_user_id_fkey'
+            columns: ['user_id']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       projects: {
@@ -855,12 +849,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "projects_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: 'projects_created_by_fkey'
+            columns: ['created_by']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
     }
@@ -871,9 +865,9 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      invitation_status: "open" | "closed" | "accepted" | "rejected"
-      project_event_type: "mesa.project.create" | "mesa.project.update"
-      project_user_role: "owner"
+      invitation_status: 'open' | 'closed' | 'accepted' | 'rejected'
+      project_event_type: 'mesa.project.create' | 'mesa.project.update'
+      project_user_role: 'owner'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -908,12 +902,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
+            foreignKeyName: 'profiles_id_fkey'
+            columns: ['id']
             isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
     }
@@ -968,12 +962,12 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "buckets_owner_fkey"
-            columns: ["owner"]
+            foreignKeyName: 'buckets_owner_fkey'
+            columns: ['owner']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
       migrations: {
@@ -1036,19 +1030,19 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "objects_bucketId_fkey"
-            columns: ["bucket_id"]
+            foreignKeyName: 'objects_bucketId_fkey'
+            columns: ['bucket_id']
             isOneToOne: false
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
+            referencedRelation: 'buckets'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "objects_owner_fkey"
-            columns: ["owner"]
+            foreignKeyName: 'objects_owner_fkey'
+            columns: ['owner']
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
     }
@@ -1122,81 +1116,74 @@ export interface Database {
 
 export type Tables<
   PublicTableNameOrOptions extends
-    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
+    | keyof (Database['public']['Tables'] & Database['public']['Views'])
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-        Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
+    ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
+        Database[PublicTableNameOrOptions['schema']]['Views'])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+  ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
+      Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R
     }
     ? R
     : never
-  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
+  : PublicTableNameOrOptions extends keyof (Database['public']['Tables'] &
+        Database['public']['Views'])
+    ? (Database['public']['Tables'] &
+        Database['public']['Views'])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
     : never
-  : never
 
 export type TablesInsert<
-  PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
-    | { schema: keyof Database },
+  PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Insert: infer I
     }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
-    }
-    ? I
+  : PublicTableNameOrOptions extends keyof Database['public']['Tables']
+    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
     : never
-  : never
 
 export type TablesUpdate<
-  PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
-    | { schema: keyof Database },
+  PublicTableNameOrOptions extends keyof Database['public']['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Update: infer U
     }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
+  : PublicTableNameOrOptions extends keyof Database['public']['Tables']
+    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
     : never
-  : never
 
 export type Enums<
-  PublicEnumNameOrOptions extends
-    | keyof Database["public"]["Enums"]
-    | { schema: keyof Database },
+  PublicEnumNameOrOptions extends keyof Database['public']['Enums'] | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
+    ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
-
+  ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
+  : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
+    ? Database['public']['Enums'][PublicEnumNameOrOptions]
+    : never

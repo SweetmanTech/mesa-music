@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import { ProjectDataTable } from "@/components/ProjectDataTable";
-import { useAccount } from "wagmi";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import NewProjectButton from "../NewProjectButton";
-import useProjects from "@/hooks/useProjects";
+import { ProjectDataTable } from '@/components/ProjectDataTable'
+import { useAccount } from 'wagmi'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import NewProjectButton from '../NewProjectButton'
+import useProjects from '@/hooks/useProjects'
 
 const DashboardPage = () => {
-  const { isConnected } = useAccount();
-  const { push } = useRouter();
-  const { projects } = useProjects();
+  const { isConnected } = useAccount()
+  const { push } = useRouter()
+  const { projects } = useProjects()
 
   useEffect(() => {
     if (!isConnected) {
-      push("/");
+      push('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isConnected]);
+  }, [isConnected])
 
   return (
     <main className="grid gap-10 container mx-auto py-10 content-start">
@@ -27,7 +27,7 @@ const DashboardPage = () => {
       </div>
       <ProjectDataTable data={projects} />
     </main>
-  );
-};
+  )
+}
 
-export default DashboardPage;
+export default DashboardPage

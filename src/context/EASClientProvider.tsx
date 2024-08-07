@@ -1,33 +1,27 @@
-"use client";
+'use client'
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react'
 
-type EASClientContextValue = null;
+type EASClientContextValue = null
 
-const EASClientContext = createContext<EASClientContextValue | undefined>(
-  undefined
-);
+const EASClientContext = createContext<EASClientContextValue | undefined>(undefined)
 
 interface EASClientProviderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const EASClientProvider = ({ children }: EASClientProviderProps) => {
-  const [easClient, setEASClient] = useState<EASClientContextValue>(null);
+  const [easClient, setEASClient] = useState<EASClientContextValue>(null)
 
-  return (
-    <EASClientContext.Provider value={easClient}>
-      {children}
-    </EASClientContext.Provider>
-  );
-};
+  return <EASClientContext.Provider value={easClient}>{children}</EASClientContext.Provider>
+}
 
 export const useEASClient = (): EASClientContextValue => {
-  const context = useContext(EASClientContext);
-  if (typeof context === "undefined") {
-    throw new Error("useEASClient must be used within a EASClientProvider");
+  const context = useContext(EASClientContext)
+  if (typeof context === 'undefined') {
+    throw new Error('useEASClient must be used within a EASClientProvider')
   }
-  return context;
-};
+  return context
+}
 
-export default EASClientProvider;
+export default EASClientProvider

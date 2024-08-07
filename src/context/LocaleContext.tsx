@@ -11,11 +11,7 @@ interface LocaleProviderProps {
 }
 
 export const LocaleProvider = ({ children, locale }: LocaleProviderProps) => {
-  return (
-    <LocaleContext.Provider value={locale}>
-      {children}
-    </LocaleContext.Provider>
-  )
+  return <LocaleContext.Provider value={locale}>{children}</LocaleContext.Provider>
 }
 
 export const useLocale = (): Locale => {

@@ -11,11 +11,7 @@ interface DictionaryProviderProps {
 }
 
 export const DictionaryProvider = ({ children, dictionary }: DictionaryProviderProps) => {
-  return (
-    <DictionaryContext.Provider value={dictionary}>
-      {children}
-    </DictionaryContext.Provider>
-  )
+  return <DictionaryContext.Provider value={dictionary}>{children}</DictionaryContext.Provider>
 }
 
 export const useDictionary = (): Dictionary => {

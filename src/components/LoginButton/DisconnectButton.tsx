@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { Button } from "../ui/button";
-import { useDisconnect } from "wagmi";
+import { Button } from '../ui/button'
+import { useDisconnect } from 'wagmi'
 
 const DisconnectButton = () => {
-  const { disconnect } = useDisconnect();
+  const { disconnect } = useDisconnect()
 
-  return <Button onClick={() => disconnect()}>Disconnect from Mesa</Button>;
-};
+  return <Button onClick={() => disconnect()}>Disconnect from Mesa</Button>
+}
 
-export default DisconnectButton;
+export default DisconnectButton

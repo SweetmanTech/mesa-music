@@ -1,22 +1,16 @@
-import Link from "next/link";
-import { cookies } from "next/headers"
+import Link from 'next/link'
+import { cookies } from 'next/headers'
 
-import { createServerClient, getUser } from "@/lib/supabase/server"
-import { Dictionary } from "@/dictionaries/types"
-import { Locale } from "@/../i18n.config"
+import { createServerClient, getUser } from '@/lib/supabase/server'
+import { Dictionary } from '@/dictionaries/types'
+import { Locale } from '@/../i18n.config'
 
-import { ThemeToggle } from "@/components/ThemeToggle"
-import { Logo } from "@/components/Logo"
-import { SignOutButton } from "@/components/SignOutButton"
-import { UserNav } from "@/components/UserNav"
+import { ThemeToggle } from '@/components/ThemeToggle'
+import { Logo } from '@/components/Logo'
+import { SignOutButton } from '@/components/SignOutButton'
+import { UserNav } from '@/components/UserNav'
 
-export default async function Header({
-  lang,
-  dict, 
-}: {
-  lang: Locale,
-  dict: Dictionary
-}) {
+export default async function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const supabase = createServerClient(cookies())
   const user = await getUser(supabase)
   return (
