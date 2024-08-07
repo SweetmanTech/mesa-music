@@ -1,6 +1,7 @@
-import getDecodedAttestationData from '@/lib/eas/getDecodedAttestationData'
-import { useEffect, useState } from 'react'
-import { useAccount } from 'wagmi'
+import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
+import { getProjects } from "@/lib/eas/getProjects";
+import { getDecodedProjectsData } from "@/lib/eas/getDecodedProjectsData";
 
 const useProjects = () => {
   const { address } = useAccount()
@@ -9,14 +10,10 @@ const useProjects = () => {
   useEffect(() => {
     const init = async () => {
       try {
-        const queryParam = address ? `?address=${address}` : ''
-        const response = await fetch(`/api/projects${queryParam}`)
-        const data = await response.json()
-        const mapped = data.data.map((attestation: any) =>
-          getDecodedAttestationData(attestation.result),
-        )
-        const decodedAttestations = mapped.filter((attestation: any) => attestation !== false)
-        setAttestations(decodedAttestations.reverse() as any)
+        const queryParam = address ? `?address=${address}` : "";
+        const data: any = await getProjects(queryParam);
+        const decodedAttestations = getDecodedProjectsData(data);
+        setAttestations(decodedAttestations.reverse() as any);
       } catch (error) {
         console.error('Failed to fetch attestations:', error)
       }

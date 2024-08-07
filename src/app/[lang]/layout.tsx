@@ -7,10 +7,12 @@ import { Toaster } from '@/components/ui/toaster'
 import Header from '@/components/Header'
 import Providers from '@/context/Providers'
 import env from '@/env'
+import MediaPlayer from '@/components/GlobalAudioPlayer/MediaPlayer'
 
 import '@/app/globals.css'
 import { getDictionary } from '@/lib/dictionary'
 import { ToastQuery } from '@/components/ToastQuery'
+import { PaymasterProvider } from '@/context/Paymasters'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
 }
 
 export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }))
+  return i18n.locales.map(locale => ({ lang: locale }))
 }
 
 export default async function RootLayout({
@@ -40,7 +42,8 @@ export default async function RootLayout({
         <Providers lang={lang}>
           <div className="grid grid-rows-[auto_minmax(0,1fr)] min-h-full h-fit max-h-full">
             <Header lang={lang} dict={dict} />
-            {children}
+            <PaymasterProvider>{children}</PaymasterProvider>
+            <MediaPlayer />
           </div>
           <ToastQuery />
           <Toaster />

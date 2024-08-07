@@ -1,19 +1,20 @@
-import { getWalletClient } from '@wagmi/core'
-import wagmiConfig from '../wagmi/config'
-import { easAbi } from '../abi/eas'
-import { CHAIN, EAS } from '../consts'
+import { easAbi } from "../abi/eas";
+import { EAS } from "../consts";
 
-const attest = async (args: any[]) => {
-  const client = await getWalletClient(wagmiConfig)
+const attest = async (writeContracts: any, capabilities: any, args: any[]) => {
   try {
-    const tx = await client.writeContract({
-      address: EAS,
-      abi: easAbi,
-      chain: CHAIN,
-      functionName: 'attest',
-      args,
-    })
-    return tx
+    const tx = await writeContracts({
+      contracts: [
+        {
+          address: EAS,
+          abi: easAbi,
+          functionName: "attest",
+          args,
+        },
+      ],
+      capabilities,
+    });
+    return tx;
   } catch (err) {
     console.error('Error during attestation:', err)
     return false

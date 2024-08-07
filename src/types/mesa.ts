@@ -54,4 +54,12 @@ export type MesaProjectUpdateEvent = MesaProjectEventBase & {
   }
 }
 
-export type MesaProjectEvent = MesaProjectCreateEvent | MesaProjectUpdateEvent
+export type MesaProjectEvent = 
+  | MesaProjectCreateEvent
+  | MesaProjectUpdateEvent
+
+export type Media = {  
+  url: string
+  avatar: string
+  name: string
+}

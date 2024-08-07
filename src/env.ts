@@ -35,55 +35,30 @@ const privateEnvSchema = {
 }
 
 // Define the schema for your environment variables
-const envSchema = z
-  .object({
-    ...(isNode && privateEnvSchema),
-    NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(32), // min(208)
-    NEXT_PUBLIC_TOS_URL: z.string().url().optional(),
-    NEXT_PUBLIC_PP_URL: z.string().url().optional(),
-    NEXT_PUBLIC_ACCESS_FORM_URL: z.string().url().optional(),
-    NEXT_PUBLIC_SIGNUPS_OPEN: z
-      .string()
-      .default('')
-      .transform((val) => val === 'true' || val === '1')
-      .pipe(z.coerce.boolean()),
-    NEXT_PUBLIC_OAUTH_PROVIDERS: z
-      .string()
-      .transform((val) => val.split(/[, ]+/).filter(Boolean))
-      .transform((val) => (val.length > 0 ? val : undefined))
-      .refine(
-        (value) => {
-          try {
-            ProviderArray.optional().parse(value)
-            return true
-          } catch {
-            return false
-          }
-        },
-        {
-          message: 'Invalid provider array',
-        },
-      )
-      .optional(),
-    NEXT_PUBLIC_THIRDWEB_CLIENT_ID: z.string().min(32),
-    NEXT_PUBLIC_SITE_TITLE: z.string().min(3),
-    NEXT_PUBLIC_SITE_DESCRIPTION: z.string().min(4),
-  })
-  .refine(
-    (value) => {
-      // OAuth is disabled when signups are closed to prevent automatic account
-      // creation. Assumes that OAuth providers array is not empty if present.
-      if (!value.NEXT_PUBLIC_SIGNUPS_OPEN && value.NEXT_PUBLIC_OAUTH_PROVIDERS) {
+const envSchema = z.object({
+  ...(isNode && privateEnvSchema),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(32), // min(208)
+  NEXT_PUBLIC_TOS_URL: z.string().url().optional(),
+  NEXT_PUBLIC_PP_URL: z.string().url().optional(),
+  NEXT_PUBLIC_ACCESS_FORM_URL: z.string().url().optional(),
+  NEXT_PUBLIC_OAUTH_PROVIDERS: z.string()
+    .transform(val => val.split(/[, ]+/).filter(Boolean))
+    .transform(val => val.length > 0 ? val : undefined)
+    .refine(value => {
+      try {
+        ProviderArray.optional().parse(value)
+        return true
+      } catch {
         return false
       }
-      return true
-    },
-    {
-      path: ['NEXT_PUBLIC_OAUTH_PROVIDERS'],
-      message: 'OAuth providers not supported while signups are closed',
-    },
-  )
+    }, {
+      message: "Invalid provider array",
+    }).optional(),
+  NEXT_PUBLIC_THIRDWEB_CLIENT_ID: z.string().min(32),
+  NEXT_PUBLIC_SITE_TITLE: z.string().min(3),
+  NEXT_PUBLIC_SITE_DESCRIPTION: z.string().min(4),
+})
 
 // Parse and validate env variables.  Without explicit mapping, the bundler may
 // replace process.env with {} and all values will be undefined.
@@ -98,7 +73,6 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_TOS_URL: process.env.NEXT_PUBLIC_TOS_URL,
   NEXT_PUBLIC_PP_URL: process.env.NEXT_PUBLIC_PP_URL,
   NEXT_PUBLIC_ACCESS_FORM_URL: process.env.NEXT_PUBLIC_ACCESS_FORM_URL,
-  NEXT_PUBLIC_SIGNUPS_OPEN: process.env.NEXT_PUBLIC_SIGNUPS_OPEN,
   NEXT_PUBLIC_THIRDWEB_CLIENT_ID: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
   NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
   NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,

@@ -1,49 +1,61 @@
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { DialogClose } from '../ui/dialog'
-import { Textarea } from '../ui/textarea'
-import { useState } from 'react'
-import { ReloadIcon } from '@radix-ui/react-icons'
-import attest from '@/lib/eas/attest'
-import getAttestArgs from '@/lib/eas/getAttestArgs'
-import getEncodedAttestationData from '@/lib/eas/getEncodedAttestationData'
-import CreateButton from './CreateButton'
-import { toast } from '../ui/use-toast'
-import { useAccount, useSwitchChain } from 'wagmi'
-import { Address } from 'viem'
-import { CHAIN_ID } from '@/lib/consts'
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { DialogClose } from "../ui/dialog";
+import { Textarea } from "../ui/textarea";
+import { useEffect, useState } from "react";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import CreateButton from "./CreateButton";
+import { toast } from "../ui/use-toast";
+import { usePaymasterProvider } from "../../context/Paymasters";
+import usePaymasterAttest from "@/hooks/usePaymasterAttest";
+import { useProjectProvider } from "@/context/ProjectProvider";
+import { CHAIN_ID } from "@/lib/consts";
+import { useSwitchChain } from "wagmi";
 
 export default function ProjectDetailsForm() {
-  const [loading, setLoading] = useState<boolean>(false)
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const { address } = useAccount()
+  const { id } = usePaymasterProvider();
+  const { attest } = usePaymasterAttest();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { name, setName, setDescription } = useProjectProvider();
   const { switchChainAsync } = useSwitchChain()
+  
+  useEffect(() => {
+    if (id !== undefined) {
+      toast({
+        title: "Success",
+        description: "Project Created Successfully!",
+        variant: "default",
+      });
+      location.reload();
+    }
+  }, [id]);
 
   const handleClick = async () => {
-    try {
-      await switchChainAsync({ chainId: CHAIN_ID })
-      setLoading(true)
-      const encodedAttestation = getEncodedAttestationData(
-        title,
-        description,
-        [],
-        [address as Address],
-        [],
-      )
-      const args = getAttestArgs(encodedAttestation)
-      await attest(args)
+    if (!name) {
       toast({
-        title: 'Success',
-        description: 'Project Created Successfully!',
-        variant: 'default',
-      })
-      location.reload()
-    } catch (error) {
-      console.error(error)
+        title: "Error",
+        description: "Title and Description are required.",
+        variant: "default",
+      });
+      return;
     }
-  }
+
+    await switchChainAsync({ chainId: CHAIN_ID })
+    setLoading(true);
+
+    try {
+      await attest();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to create project.",
+        variant: "default",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="grid gap-6">
@@ -57,7 +69,7 @@ export default function ProjectDetailsForm() {
           autoCapitalize="none"
           autoCorrect="off"
           required
-          onBlur={(e) => setTitle(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="grid gap-3">
