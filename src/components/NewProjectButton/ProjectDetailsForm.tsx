@@ -10,12 +10,15 @@ import { toast } from "../ui/use-toast";
 import { usePaymasterProvider } from "../../context/Paymasters";
 import usePaymasterAttest from "@/hooks/usePaymasterAttest";
 import { useProjectProvider } from "@/context/ProjectProvider";
+import { defaultCredit } from "@/types/projectMetadataForm";
+import { useProfileProvider } from "@/context/ProfileProvider";
 
 export default function ProjectDetailsForm() {
   const { id } = usePaymasterProvider();
   const { attest } = usePaymasterAttest();
   const [loading, setLoading] = useState<boolean>(false);
-  const { name, setName, setDescription } = useProjectProvider();
+  const { name, setName, setDescription, setCredits } = useProjectProvider();
+  const { user } = useProfileProvider();
 
   useEffect(() => {
     if (id !== undefined) {
@@ -52,6 +55,10 @@ export default function ProjectDetailsForm() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setCredits([{...defaultCredit, name: user.username }]);
+  }, [])
 
   return (
     <div className="grid gap-6">
