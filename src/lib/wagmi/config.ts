@@ -7,7 +7,7 @@ const wagmiConfig = createConfig({
     connectors: [
       coinbaseWallet({
         appName: "mesa",
-        preference: "smartWalletOnly",
+        // preference: "smartWalletOnly",
       }),
     ],
     transports: {
