@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "../ui/dialog";
 import { Textarea } from "../ui/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import CreateButton from "./CreateButton";
 import { toast } from "../ui/use-toast";
